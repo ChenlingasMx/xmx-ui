@@ -11,8 +11,6 @@ npm install xmx-ui
 
 **import**
 
-Runs the project in development mode.  
-
 ```
-  import { XBraftEditor } from 'xmx-ui'
+import { XBraftEditor } from 'xmx-ui'
 ```
