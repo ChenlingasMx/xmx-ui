@@ -34,16 +34,18 @@ type myUploadParams = {
 export interface BraftEditorProp {
   viewHtml?: string;
   isView?: boolean;
-  onChangeValue?: (value) => void;
-  validateFn?:(file: File) => boolean | PromiseLike<any>,
-  myUploadFn?:(value:myUploadParams) => void; // 指定本地校验函数
+  onChangeValue?: (value: any) => void;
+  validateFn?: (file: File) => boolean | PromiseLike<any>,
+  onChange?:(value:any)=>void,
+  onInsert?:(value:any)=>void,
+  myUploadFn?: (value: myUploadParams) => void; // 指定本地校验函数
   otherProps?: Readonly<BraftEditorProps>
 }
 
 // 防止重复渲染
 function areEqual(prevProps: any, nextProps: any) {
   return (
-    prevProps.viewHtml&&prevProps.viewHtml === nextProps.viewHtml&&nextProps.viewHtml
+    prevProps.viewHtml && prevProps.viewHtml === nextProps.viewHtml && nextProps.viewHtml
   );
 }
 
@@ -53,6 +55,8 @@ const XBraftEditor: React.FC<BraftEditorProp> = props => {
     isView = false, // 是否查看模式,
     onChangeValue,
     validateFn,
+    onChange,
+    onInsert,
     myUploadFn,
     otherProps
   } = props;
@@ -67,7 +71,7 @@ const XBraftEditor: React.FC<BraftEditorProp> = props => {
     }
   }, [viewHtml]);
 
-  const handleEditorChange = editorState => {
+  const handleEditorChange = (editorState:any) => {
     setEditorState(editorState);
     // 输出 html
     onChangeValue && onChangeValue(editorState.toHTML())
@@ -76,24 +80,24 @@ const XBraftEditor: React.FC<BraftEditorProp> = props => {
 
   return isView ? (
     <div className="view-editor" dangerouslySetInnerHTML={{ __html: viewHtml }} />
-  ) : (
-    <BraftEditor
-      {...otherProps}
-      value={editorState}
-      onChange={debounce(handleEditorChange, 300)}
-      media={{
-        accepts: {
-          image: false, // 开启图片插入功能
-          video: false, // 开启视频插入功能
-          audio: false, // 开启音频插入功能
-        },
-        validateFn: validateFn, // 指定本地校验函数，说明见下文
-        uploadFn: myUploadFn, // 指定上传函数，说明见下文
-        onChange: null, // 指定媒体库文件列表发生变化时的回调，参数为媒体库文件列表(数组)
-        onInsert: null, // 指定从媒体库插入文件到编辑器时的回调，参数为被插入的媒体文件列表(数组)
-      }}
-    />
-  );
+  ) :(
+      <BraftEditor
+        {...otherProps}
+        value={editorState}
+        onChange={debounce(handleEditorChange, 300)}
+        media={{
+          accepts: {
+            image: false, // 开启图片插入功能
+            video: false, // 开启视频插入功能
+            audio: false, // 开启音频插入功能
+          },
+          validateFn: validateFn, // 指定本地校验函数，说明见下文
+          uploadFn: myUploadFn, // 指定上传函数，说明见下文
+          onChange: onChange, // 指定媒体库文件列表发生变化时的回调，参数为媒体库文件列表(数组)
+          onInsert: onInsert, // 指定从媒体库插入文件到编辑器时的回调，参数为被插入的媒体文件列表(数组)
+        }}
+      />
+    );
 };
 
 export default (memo(XBraftEditor, areEqual));
