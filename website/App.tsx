@@ -1,12 +1,11 @@
 import React from 'react';
 import './App.css';
-import { XBrafitEditor } from  '../'
+ import { XButton } from  '../'
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <XBrafitEditor />
-      xmxui
+      <XButton type="primary" >xmx-ui</XButton>
     </div>
   );
 };
