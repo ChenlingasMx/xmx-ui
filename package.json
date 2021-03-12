@@ -40,7 +40,11 @@
   "peerDependencies": {
     "@babel/runtime": ">=7.10.0",
     "react": ">=16.9.0",
-    "react-dom": ">=16.9.0"
+    "react-dom": ">=16.9.0",
+    "antd": ">=4.3.0",
+    "xlsx":">=0.16.8",
+    "lodash": ">=4.17.15",
+    "lodash-decorators": ">=6.0.1"
   },
   "dependencies": {
     "prop-types": "15.7.2"
@@ -61,7 +65,9 @@
     "tsbb": "2.0.11",
     "lodash": "4.17.15",
     "lodash-decorators": "6.0.1",
-    "braft-editor":"2.3.9"
+    "braft-editor":"2.3.9",
+    "antd": "4.11.2",
+    "xlsx": "0.16.8"
   },
   "eslintConfig": {
     "extends": [
