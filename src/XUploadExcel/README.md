@@ -29,7 +29,7 @@ const Demo = () => {
 
 | 参数       | 说明                                                 | 类型          | 默认值 |
 | :--------- | :--------------------------------------------------- | :------------ | :----- |
-| getData     | 获取操作后的值                                  | object{}        | object |
+| getData     | 获取操作后的值                                  | function(value): object[]       | () => {} |
 | buttonProps     | Button的属性(antd4.x)                      | object{}        | object |
 | uploadProps     | 上传组件的属性(antd4.x)                      | object{}        | object |
 
