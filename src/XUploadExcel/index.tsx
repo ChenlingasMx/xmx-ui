@@ -1,15 +1,24 @@
 import React from 'react';
-import { Upload } from 'antd';
+import { Upload, UploadProps } from 'antd';
 import Button from '../XButton'
 import XLSX from 'xlsx';
 
-const XUploadExcel  =({
-  buttonProps={},
-  uploadProps={},
-  getData=null,
-  text=""
-}) => {
-  const onChange = e => {
+export interface XUploadExcelrProp {
+  buttonProps?: Object | undefined;
+  uploadProps?: Object | undefined;
+  getData?: (value: any) => void;
+  text?: string;
+}
+
+const XUploadExcel: React.FC<XUploadExcelrProp> = props => {
+  const {
+    buttonProps = {},
+    uploadProps = {},
+    getData = () => { },
+    text = ""
+  } = props
+
+  const onChange = (e: any) => {
     // 拿取文件对象，注：不同框架获取到的对象可能不同，传统upload拿到的对象应该是e.target.file
     var f = e.fileList[0].originFileObj;
     var binary = '';
@@ -17,8 +26,9 @@ const XUploadExcel  =({
     var outdata;
     var reader = new FileReader();
     reader.onload = () => {
+      let dataResult: any = reader.result
       // 读取成Uint8Array，再转换为Unicode编码（Unicode占两个字节）
-      var bytes = new Uint8Array(reader.result);
+      var bytes = new Uint8Array(dataResult);
       var length = bytes.byteLength;
       for (var i = 0; i < length; i++) {
         binary += String.fromCharCode(bytes[i]);
@@ -34,24 +44,24 @@ const XUploadExcel  =({
     reader.readAsArrayBuffer(f);
   };
 
-  let props = {
-    name: 'file',
-    action: '',
+  let params: UploadProps = {
+    name: "file",
+    action: "",
     headers: {
       authorization: 'authorization-text',
-      'x-auth': sessionStorage.getItem('x-auth'),
+      "x-auth": sessionStorage.getItem("x-auth") + "",
     },
     // 阻止组件自带post请求
     beforeUpload: () => {
       return false;
     },
     showUploadList: false,
-    accept: '.xls,.xlsx',
+    accept: ".xls,.xlsx",
     onChange: onChange,
     ...uploadProps
   };
   return (
-    <Upload {...props}>
+    <Upload {...params}>
       <Button
         {...buttonProps}
         type="primary"
