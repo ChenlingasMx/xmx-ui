@@ -11,8 +11,6 @@ const Demo = () => {
        <XUploadExcel 
           getData={(value)=>{console.log(value)}}
           text="导入"
-          hidden={false}
-          disabled ={false}
           uploadProps={ }
           buttonProps={ }
         />
