@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
- import { XButton } from  '../'
+ import { XRadio } from  '../'
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <XButton type="primary" >xmx-ui</XButton>
+      <XRadio value="腾仔爱青青姐三生三世"/>
     </div>
   );
 };

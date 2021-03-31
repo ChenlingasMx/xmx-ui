@@ -1,0 +1,51 @@
+@x-radio:~ "x-radio";
+
+.@{x-radio} {
+  vertical-align: middle;
+  display: inline-block;
+  outline: none;
+  position: relative;
+  width: 16px;
+  height: 16px;
+  background-clip: border-box;
+  appearance: none;
+  margin: -0.15px 0.6px 0 0;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 1px solid #FF4500;
+  transition: border 0.25s, box-shadow 0.25s;
+  &:not(:checked):not(:disabled):not(.disabled) {
+    &:hover,
+    &:focus {
+      box-shadow: 0 0 0 2px #FF4500;
+    }
+  }
+  &:checked {
+    background:#FF4500;
+  }
+  &.disabled {
+    color: #c7c7c7;
+    cursor: not-allowed;
+  }
+  &.disabled:not(.checked) {
+    input[type='radio'] {
+      background-color: #efefef;
+    }
+  }
+  &-large{
+    width: 30px;
+    height: 30px;
+  }
+  &-small{
+    width: 10px;
+    height: 10px;
+  }
+  &-text {
+    vertical-align: middle;
+    display: inline-block;
+    margin-left: 4px;
+    margin-right: 5px;
+    font-size: 14px;
+    color: #FF4500;
+  }
+}
