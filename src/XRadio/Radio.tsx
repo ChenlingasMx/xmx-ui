@@ -8,6 +8,7 @@ export interface XRadioProp {
   type: string;
   value?: any;
   children?: any;
+  style?: any
   size?: 'large' | 'default' | 'small';
   onChange?: (value: React.ChangeEvent<HTMLInputElement> | Boolean) => {}
 }
@@ -20,11 +21,14 @@ const XRadio: React.FC<XRadioProp> = props => {
     disabled = false,
     size = 'default',
     value = '',
+    style,
     children,
     className,
     onChange,
     ...other
   } = props
+  const inputRef = React.createRef<HTMLInputElement>();
+
   const [checked, setChecked] = useState(prChecked);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,13 +47,18 @@ const XRadio: React.FC<XRadioProp> = props => {
     disabled ? 'disabled' : null,
     size ? `${prefixCls}-${size}` : null,
   ].filter(Boolean).join(' ').trim();
-
+  let label = children || value
   return (
     <div>
-        <input checked={checked} onChange={handleChange}  {...{ ...other, value, type, disabled }} className={cls} />
-        {value && <div className={`${prefixCls}-text`}>{value}</div>}
+      <input
+        checked={checked}
+        onChange={handleChange}
+        {...{ ...other, value, type, disabled }}
+        className={cls}
+        ref={inputRef}
+      />
+      {label && <div className={`${prefixCls}-text`} style={{ color: disabled ? "#efefef" : "black" }} >{label}</div>}
     </div>
-
   );
 }
 

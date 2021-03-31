@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
- import { XRadio } from  '../'
+import { XRadioGroup, XRadio } from '../'
 
 const App: React.FC = () => {
+  const [value, setValue] = useState('')
   return (
     <div className="App">
-      <XRadio value="腾仔爱青青姐三生三世"/>
+      <XRadioGroup
+        name="sexs"
+        value={value}
+        onChange={value => setValue(value)}
+        className="center"
+      >
+        <XRadio value="man">男</XRadio>
+        <XRadio value="girl">女</XRadio>
+        <XRadio value="unknown" disabled >人妖</XRadio>
+      </XRadioGroup>
     </div>
   );
 };

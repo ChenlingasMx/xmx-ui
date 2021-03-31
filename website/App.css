@@ -34,9 +34,16 @@ body {
 .info {
   text-align: left;
   font-size: calc(10px + 2vmin);
-  width: 820px;;
+  width: 820px;
+  ;
   padding-top: 10px;
   overflow: auto;
   white-space: pre-wrap;
   word-wrap: break-word;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
