@@ -4,7 +4,8 @@ xmx-ui
  * 1.XBraftEditor富文本编辑器
  * 2.XButton
  * 3.XUploadExcel
- * 4.XRadio
+ * 4.XRadioGroup
+ * 5.XRadio
 ## Quick install
 
 ```bash
